@@ -3,10 +3,20 @@
 #include <unistd.h>
 #include <iostream>
 #include <chrono>
+#include <signal.h>
 using namespace rgb_matrix;
 using namespace std::chrono;
 
+volatile bool interrupt_received = false;
+static void InterruptHandler(int signo) {
+    interrupt_received = true;
+}
+
 int main() {
+    // Set up signal handler for graceful exit
+    signal(SIGTERM, InterruptHandler);
+    signal(SIGINT, InterruptHandler);
+    
     // Matrix setup
     RGBMatrix::Options matrix_options;
     matrix_options.rows = 32;
@@ -22,6 +32,7 @@ int main() {
         return 1;
     }
     FrameCanvas *canvas = matrix->CreateFrameCanvas();
+    
     // Colors
     Color sky(0, 0, 255);
     Color ground(0, 128, 0);
@@ -42,7 +53,7 @@ int main() {
     float balloon_speed = 0.05f;  // pixels per frame (adjust for faster/slower)
     
     // Display continuously
-    while (true) {
+    while (!interrupt_received) {
         // Clear canvas and redraw background
         canvas->Fill(sky.r, sky.g, sky.b);
         
@@ -87,7 +98,7 @@ int main() {
                 for (int s = 0; s < 6; ++s) {
                     int string_y = y_pos + 2 + s;
                     if (string_y >= 0 && string_y < 32)
-                        canvas->SetPixel(balloon_start_x[i], string_y, 
+                        canvas->SetPixel(balloon_start_x[i], string_y,
                                        string_color.r, string_color.g, string_color.b);
                 }
             }
@@ -96,6 +107,12 @@ int main() {
         canvas = matrix->SwapOnVSync(canvas);
         usleep(50000);  // ~20 fps
     }
+    
+    // Clean up on exit - clear the display
+    canvas->Clear();
+    canvas = matrix->SwapOnVSync(canvas);
     delete matrix;
+    
+    std::cout << "\nDisplay cleared. Exiting gracefully.\n";
     return 0;
 }
