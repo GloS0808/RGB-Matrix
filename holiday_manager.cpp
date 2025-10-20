@@ -312,7 +312,7 @@ public:
 };
 
 int main(int argc, char* argv[]) {
-    std::string scripts_path = "/home/seth/rgbMatrix/rpi-rgb-led-matrix/examples-api-use/rgbScripts";
+    std::string scripts_path = "/home/USER/rgbMatrix/rpi-rgb-led-matrix/examples-api-use/rgbScripts";
     std::string config_file = scripts_path + "/holidays.conf";
     std::string default_program = "clockV2grok";
     std::string weather_api_key = "";
