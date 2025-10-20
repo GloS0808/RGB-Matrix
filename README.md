@@ -13,9 +13,9 @@ This project contains multiple C++ scenes and animations for a 32x32 RGB LED mat
 Follow Adafruit's official hardware setup guide: [Adafruit RGB Matrix Bonnet for Raspberry Pi](https://learn.adafruit.com/adafruit-rgb-matrix-bonnet-for-raspberry-pi/overview)
 
 **Important configuration notes**:
-- For 64x64 matrices, use parameters like `--led-cols=64 --led-rows=64`:cite[1]
-- Some panels may require specific multiplexing settings: `--led-multiplexing`:cite[1]
-- If experiencing timing issues, try `--led-slowdown-gpio=2`:cite[3]
+- For 64x64 matrices, use parameters like `--led-cols=64 --led-rows=64`
+- Some panels may require specific multiplexing settings: `--led-multiplexing`
+- If experiencing timing issues, try `--led-slowdown-gpio=2`
 
 ## Software Installation
 
