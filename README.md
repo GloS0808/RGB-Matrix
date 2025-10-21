@@ -3,6 +3,7 @@ Raspberry Pi project driving a 32x32 RGB LED matrix using Adafruit RGB Matrix Bo
 
 ## Project Overview
 This project contains multiple C++ scenes and animations for a 32x32 RGB LED matrix driven by a Raspberry Pi with an Adafruit RGB Matrix Bonnet. The code is built on the `rpi-rgb-led-matrix` library:cite[1] and includes various seasonal, holiday, and special event animations.
+**Development Note:** This project utilized AI assistance during development. All generated code has been thoroughly tested and validated to ensure functionality and reliability.
 
 ## Hardware Setup
 - **Controller**: Raspberry Pi 3
